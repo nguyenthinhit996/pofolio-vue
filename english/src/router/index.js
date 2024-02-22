@@ -1,13 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import MochiViewVue from '@/views/MochiView.vue'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+export const router = createRouter({
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/mochi',
+      name: 'mochi',
+      component: MochiViewVue
     },
     {
       path: '/about',
@@ -19,5 +25,3 @@ const router = createRouter({
     }
   ]
 })
-
-export default router

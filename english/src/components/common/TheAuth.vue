@@ -44,6 +44,17 @@
             </li>
           </ul>
 
+          <p
+            class="text-center"
+            :class="{
+              'text-blue-500': stateForm.isLoading,
+              'text-red-500': !stateForm.isLoading && !stateForm.isSuccess,
+              'text-green-500': !stateForm.isLoading && stateForm.isSuccess
+            }"
+          >
+            {{ stateForm.msg }}
+          </p>
+
           <!-- Login Form -->
           <form v-if="tab === 'login'">
             <!-- Email -->
@@ -77,8 +88,11 @@
             v-if="tab === 'register'"
             :validation-schema="schema"
             @submit="handlSubmit"
+            v-slot="{ ...rest }"
           >
             <!-- Name -->
+            <pre>{{ console.log(rest) }}</pre>
+
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
               <vee-field
@@ -164,12 +178,13 @@
             </div>
             <button
               type="submit"
-              :class="{
-                'bg-gray-300 text-gray-500 px-4 py-2 rounded-md cursor-not-allowed':
-                  !isEnableButtonSubmit()
-              }"
-              :disabled="!isEnableButtonSubmit()"
-              class="read-only block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition"
+              :disabled="isDisableButtonSubmit()"
+              class="read-only block w-full py-1.5 px-3 rounded transition"
+              :class="[
+                isDisableButtonSubmit()
+                  ? 'bg-gray-300 text-gray-500 px-4 py-2 rounded-md cursor-not-allowed'
+                  : 'bg-purple-600 text-white '
+              ]"
             >
               Submit
             </button>
@@ -201,6 +216,11 @@ export default {
       },
       initialValue: {
         country: 'USA'
+      },
+      stateForm: {
+        msg: '',
+        isLoading: false,
+        isSuccess: false
       }
     }
   },
@@ -216,18 +236,40 @@ export default {
     handleClickOutside() {
       this.isOpenModalAuth = false
     },
-    handlSubmit(...rest) {
-      console.log(rest)
+    callAPI(deplay, isSuccess) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (isSuccess) {
+            resolve([1, 2, 34, 3])
+          } else {
+            reject('Error')
+          }
+        }, deplay)
+      })
     },
-    isEnableButtonSubmit() {
-      // console.log(this.$refs?.registerForm)
-      // console.log(this.$refs?.registerForm?.errors)
-      // console.log(this.$refs?.registerForm?.getErrors())
-      // console.log(this.$refs?.registerForm?.getMeta())
+    async handlSubmit(...rest) {
+      console.log(rest)
+      this.stateForm.isLoading = true
 
-      return (
-        isEmpty(this.$refs?.registerForm?.getErrors()) && this.$refs?.registerForm?.getMeta()?.dirty
-      )
+      this.stateForm.msg = 'API Calling ...'
+      try {
+        const data = await this.callAPI(4000, true)
+        console.log(data)
+        this.stateForm.isSuccess = true
+        this.stateForm.msg = 'Success created user'
+      } catch (e) {
+        console.log(e)
+        this.stateForm.msg = e
+        this.stateForm.isSuccess = false
+      }
+      this.stateForm.isLoading = false
+    },
+    isDisableButtonSubmit() {
+      const result =
+        !isEmpty(this.$refs?.registerForm?.getErrors()) ||
+        this.stateForm.isLoading ||
+        !this.$refs?.registerForm?.getMeta().dirty
+      return result
     }
   }
 }

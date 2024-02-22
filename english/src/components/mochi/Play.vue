@@ -4,14 +4,14 @@
     <input type="range" min="0" max="100" value="0" id="processlearning" />
 
     <!-- <keep-alive> -->
-      <component
-        :is="typeOfQuestion"
-        :sentence="dataraw.sentence"
-        :wordUnderline="dataraw.wordUnderline"
-        :means="dataraw.means"
-        :words="dataraw.name"
-        :meanVietnamese="dataraw.meaningVN"
-      ></component>
+    <component
+      :is="typeOfQuestion"
+      :sentence="dataraw.sentence"
+      :wordUnderline="dataraw.wordUnderline"
+      :means="dataraw.means"
+      :words="dataraw.name"
+      :meanVietnamese="dataraw.meaningVN"
+    ></component>
     <!-- </keep-alive> -->
 
     <button id="checking" @click="handleOnCheck">Check</button>
@@ -24,7 +24,7 @@
 <script>
 import TypingQuestion from './TypingQuestion.vue'
 import ChoosingQuestion from './ChoosingQuestion.vue'
-import { factoryValue } from '../util/mathematic'
+import { factoryValue } from '@/util/mathematic'
 import PopupInformation from './PopResult.vue'
 
 const responseData = factoryValue()
@@ -56,9 +56,9 @@ export default {
     sliderEl3.addEventListener('input', (event) => {
       const tempSliderValue = Number(event.target.value)
       const progress = (tempSliderValue / sliderEl3.max) * 100
-      console.log(progress);
-          sliderEl3.style.background = `linear-gradient(to right, yellow ${progress}%, #ccc ${progress}%)`
-    });
+      console.log(progress)
+      sliderEl3.style.background = `linear-gradient(to right, yellow ${progress}%, #ccc ${progress}%)`
+    })
   }
 }
 </script>
