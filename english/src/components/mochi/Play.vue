@@ -90,7 +90,7 @@ export default {
   height: 30px;
   width: 30px;
   background: transparent;
-  background-image: url('../assets/peter.png');
+  background-image: url('../../assets/peter.png');
   background-size: cover;
   border-radius: 50%;
 }

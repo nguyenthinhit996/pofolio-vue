@@ -6,7 +6,8 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import { router } from './router'
-import Validation from './components/plugin/Validation'
+import ValidationPulgin from './components/plugin/Validation'
+import PrimeVuePlugin from './components/plugin/PrimeVue'
 
 import PrimeVue from 'primevue/config'
 import Lara from '@/presets/lara' //import preset
@@ -15,7 +16,8 @@ const app = createApp(App)
 app.use(router)
 
 app.use(createPinia())
-app.use(Validation)
+app.use(ValidationPulgin)
+app.use(PrimeVuePlugin)
 app.use(PrimeVue, {
   unstyled: true,
   pt: Lara
