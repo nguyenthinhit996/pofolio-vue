@@ -28,18 +28,35 @@
           <ul class="flex flex-wrap mb-4">
             <li class="flex-auto text-center">
               <a
-                class="block rounded py-3 px-4 transition hover:text-white text-white bg-blue-600"
+                @click="tab = 'login'"
+                :class="{ 'hover:text-white text-white bg-blue-600': tab === 'login' }"
+                class="block rounded py-3 px-4 transition"
                 href="#"
                 >Login</a
               >
             </li>
-            <li class="flex-auto text-center">
+            <li
+              class="flex-auto text-center"
+              @click="tab = 'register'"
+              :class="{ 'hover:text-white text-white bg-blue-600': tab === 'register' }"
+            >
               <a class="block rounded py-3 px-4 transition" href="#">Register</a>
             </li>
           </ul>
 
+          <p
+            class="text-center"
+            :class="{
+              'text-blue-500': stateForm.isLoading,
+              'text-red-500': !stateForm.isLoading && !stateForm.isSuccess,
+              'text-green-500': !stateForm.isLoading && stateForm.isSuccess
+            }"
+          >
+            {{ stateForm.msg }}
+          </p>
+
           <!-- Login Form -->
-          <form>
+          <form v-if="tab === 'login'">
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
@@ -66,74 +83,112 @@
             </button>
           </form>
           <!-- Registration Form -->
-          <form>
+          <vee-form
+            ref="registerForm"
+            v-if="tab === 'register'"
+            :validation-schema="schema"
+            @submit="handlSubmit"
+            v-slot="{ ...rest }"
+          >
             <!-- Name -->
+            <pre>{{ console.log(rest) }}</pre>
+
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
-              <input
+              <vee-field
                 type="text"
+                name="name"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Enter Name"
               />
+              <error-message class="text-red-700" name="name"></error-message>
             </div>
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
-              <input
+              <vee-field
                 type="email"
+                name="email"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Enter Email"
               />
+              <error-message class="text-red-700" name="email"></error-message>
             </div>
             <!-- Age -->
             <div class="mb-3">
               <label class="inline-block mb-2">Age</label>
-              <input
+              <vee-field
+                name="age"
                 type="number"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
               />
+              <error-message class="text-red-700" name="age"></error-message>
             </div>
             <!-- Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
-              <input
-                type="password"
-                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-                placeholder="Password"
-              />
+              <vee-field name="password" v-slot="{ field, errors }" :bails="false">
+                <input
+                  type="password"
+                  class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                  placeholder="Password"
+                  v-bind="field"
+                />
+                <div class="text-red-700" v-for="error in errors" :key="error">error</div>
+              </vee-field>
+
+              <!-- <error-message class="text-red-700" name="password"></error-message> -->
             </div>
             <!-- Confirm Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Confirm Password</label>
-              <input
+              <vee-field
+                :validateOnInput="false"
+                name="confirm_password"
                 type="password"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Confirm Password"
               />
+              <error-message class="text-red-700" name="confirm_password"></error-message>
             </div>
             <!-- Country -->
             <div class="mb-3">
               <label class="inline-block mb-2">Country</label>
-              <select
+              <vee-field
+                as="select"
+                name="country"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
               >
                 <option value="USA">USA</option>
                 <option value="Mexico">Mexico</option>
                 <option value="Germany">Germany</option>
-              </select>
+              </vee-field>
+              <error-message class="text-red-700" name="country"></error-message>
             </div>
             <!-- TOS -->
             <div class="mb-3 pl-6">
-              <input type="checkbox" class="w-4 h-4 float-left -ml-6 mt-1 rounded" />
-              <label class="inline-block">Accept terms of service</label>
+              <vee-field
+                value="1"
+                name="tos"
+                type="checkbox"
+                class="w-4 h-4 float-left -ml-6 mt-1 rounded"
+              />
+              <label class="inline-block custom-background">Accept terms of service</label>
+              <error-message class="text-red-700" name="tos"></error-message>
             </div>
             <button
               type="submit"
-              class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+              :disabled="isDisableButtonSubmit()"
+              class="read-only block w-full py-1.5 px-3 rounded transition"
+              :class="[
+                isDisableButtonSubmit()
+                  ? 'bg-gray-300 text-gray-500 px-4 py-2 rounded-md cursor-not-allowed'
+                  : 'bg-purple-600 text-white '
+              ]"
             >
               Submit
             </button>
-          </form>
+          </vee-form>
         </div>
       </div>
     </div>
@@ -143,9 +198,32 @@
 <script>
 import { mapWritableState } from 'pinia'
 import { useModalStore } from '@/stores/modal'
+import { isEmpty } from 'lodash'
 
 export default {
   name: 'TheAuth',
+  data() {
+    return {
+      tab: 'login',
+      schema: {
+        name: 'required',
+        email: 'required|email',
+        age: 'required|numeric',
+        password: 'required|numeric|min:4',
+        confirm_password: 'required|confirmed:@password',
+        country: 'required',
+        tos: 'required'
+      },
+      initialValue: {
+        country: 'USA'
+      },
+      stateForm: {
+        msg: '',
+        isLoading: false,
+        isSuccess: false
+      }
+    }
+  },
   computed: {
     ...mapWritableState(useModalStore, {
       isOpenModalAuth: 'isOpen'
@@ -157,6 +235,41 @@ export default {
     },
     handleClickOutside() {
       this.isOpenModalAuth = false
+    },
+    callAPI(deplay, isSuccess) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (isSuccess) {
+            resolve([1, 2, 34, 3])
+          } else {
+            reject('Error')
+          }
+        }, deplay)
+      })
+    },
+    async handlSubmit(...rest) {
+      console.log(rest)
+      this.stateForm.isLoading = true
+
+      this.stateForm.msg = 'API Calling ...'
+      try {
+        const data = await this.callAPI(4000, true)
+        console.log(data)
+        this.stateForm.isSuccess = true
+        this.stateForm.msg = 'Success created user'
+      } catch (e) {
+        console.log(e)
+        this.stateForm.msg = e
+        this.stateForm.isSuccess = false
+      }
+      this.stateForm.isLoading = false
+    },
+    isDisableButtonSubmit() {
+      const result =
+        !isEmpty(this.$refs?.registerForm?.getErrors()) ||
+        this.stateForm.isLoading ||
+        !this.$refs?.registerForm?.getMeta().dirty
+      return result
     }
   }
 }

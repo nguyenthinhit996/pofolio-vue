@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Play from './components/mochi/Play.vue'
+import Play from '@/components/mochi/Play.vue'
 export default {
   name: 'App',
   components: {

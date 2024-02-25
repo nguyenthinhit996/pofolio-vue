@@ -13,7 +13,10 @@
             <a class="px-2 text-white" @click.prevent="toggleAuth">Login / Register</a>
           </li>
           <li>
-            <a class="px-2 text-white" href="#">Manage</a>
+            <router-link class="px-2 text-white" to="/manage">Manage</router-link>
+          </li>
+          <li>
+            <router-link class="px-2 text-white" to="/mochi">Go to Mochi</router-link>
           </li>
         </ul>
       </div>
@@ -24,9 +27,10 @@
 <script>
 import { mapWritableState } from 'pinia'
 import { useModalStore } from '@/stores/modal'
+// import { ManagermentBoard } from '@/components/mochi/Management.vue'
 
 export default {
-  name: 'MusicHeader',
+  name: 'TheHeader',
   computed: {
     ...mapWritableState(useModalStore, {
       isOpenModalAuth: 'isOpen'
@@ -36,6 +40,15 @@ export default {
     toggleAuth() {
       this.isOpenModalAuth = !this.isOpenModalAuth
     }
+  },
+  components: {
+    // ManagermentBoard
+  },
+  props: {
+    abc: String
+  },
+  mounted() {
+    console.log('props', this.abc)
   }
 }
 </script>

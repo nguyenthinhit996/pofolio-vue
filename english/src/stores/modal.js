@@ -1,9 +1,10 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-export const useModalStore = defineStore("modal", {
-    state: () => {
-        return {
-            isOpen: false
-        }
+export const useModalStore = defineStore('modal', {
+  state: () => {
+    return {
+      isOpen: false
     }
+  },
+  getters: {}
 })
