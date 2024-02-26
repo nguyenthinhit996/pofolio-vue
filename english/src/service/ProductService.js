@@ -1,1220 +1,373 @@
-export const ProductService = {
-  getProductsData() {
-    return [
+export const getVocabolaryByAccount = [
+  {
+    id: '5c8d9e2a',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
+    type: 'Verb',
+    word: 'Follow',
+    meaningVN: 'Theo dõi',
+    describe: 'To come after (something) in time or order; to pursue as a guide',
+    frequency: '6/10',
+    example: 'Please follow the instructions carefully.',
+    synonyms: ['pursue', 'chase', 'trail', 'shadow'],
+    antonyms: ['lead', 'precede', 'guide', 'direct'],
+    otherForms: [
       {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1001',
-        code: 'nvklal433',
-        name: 'Black Watch',
-        description: 'Product Description',
-        image: 'black-watch.jpg',
-        price: 72,
-        category: 'Accessories',
-        quantity: 61,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1002',
-        code: 'zz21cz3c1',
-        name: 'Blue Band',
-        description: 'Product Description',
-        image: 'blue-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-      },
-      {
-        id: '1003',
-        code: '244wgerg2',
-        name: 'Blue T-Shirt',
-        description: 'Product Description',
-        image: 'blue-t-shirt.jpg',
-        price: 29,
-        category: 'Clothing',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1004',
-        code: 'h456wer53',
-        name: 'Bracelet',
-        description: 'Product Description',
-        image: 'bracelet.jpg',
-        price: 15,
-        category: 'Accessories',
-        quantity: 73,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1005',
-        code: 'av2231fwg',
-        name: 'Brown Purse',
-        description: 'Product Description',
-        image: 'brown-purse.jpg',
-        price: 120,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
-      },
-      {
-        id: '1006',
-        code: 'bib36pfvm',
-        name: 'Chakra Bracelet',
-        description: 'Product Description',
-        image: 'chakra-bracelet.jpg',
-        price: 32,
-        category: 'Accessories',
-        quantity: 5,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-      },
-      {
-        id: '1007',
-        code: 'mbvjkgip5',
-        name: 'Galaxy Earrings',
-        description: 'Product Description',
-        image: 'galaxy-earrings.jpg',
-        price: 34,
-        category: 'Accessories',
-        quantity: 23,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1008',
-        code: 'vbb124btr',
-        name: 'Game Controller',
-        description: 'Product Description',
-        image: 'game-controller.jpg',
-        price: 99,
-        category: 'Electronics',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 4
-      },
-      {
-        id: '1009',
-        code: 'cm230f032',
-        name: 'Gaming Set',
-        description: 'Product Description',
-        image: 'gaming-set.jpg',
-        price: 299,
-        category: 'Electronics',
-        quantity: 63,
-        inventoryStatus: 'INSTOCK',
-        rating: 3
-      },
-      {
-        id: '1010',
-        code: 'plb34234v',
-        name: 'Gold Phone Case',
-        description: 'Product Description',
-        image: 'gold-phone-case.jpg',
-        price: 24,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
-      },
-      {
-        id: '1011',
-        code: '4920nnc2d',
-        name: 'Green Earbuds',
-        description: 'Product Description',
-        image: 'green-earbuds.jpg',
-        price: 89,
-        category: 'Electronics',
-        quantity: 23,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1012',
-        code: '250vm23cc',
-        name: 'Green T-Shirt',
-        description: 'Product Description',
-        image: 'green-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 74,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1013',
-        code: 'fldsmn31b',
-        name: 'Grey T-Shirt',
-        description: 'Product Description',
-        image: 'grey-t-shirt.jpg',
-        price: 48,
-        category: 'Clothing',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 3
-      },
-      {
-        id: '1014',
-        code: 'waas1x2as',
-        name: 'Headphones',
-        description: 'Product Description',
-        image: 'headphones.jpg',
-        price: 175,
-        category: 'Electronics',
-        quantity: 8,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 5
-      },
-      {
-        id: '1015',
-        code: 'vb34btbg5',
-        name: 'Light Green T-Shirt',
-        description: 'Product Description',
-        image: 'light-green-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 34,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1016',
-        code: 'k8l6j58jl',
-        name: 'Lime Band',
-        description: 'Product Description',
-        image: 'lime-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 12,
-        inventoryStatus: 'INSTOCK',
-        rating: 3
-      },
-      {
-        id: '1017',
-        code: 'v435nn85n',
-        name: 'Mini Speakers',
-        description: 'Product Description',
-        image: 'mini-speakers.jpg',
-        price: 85,
-        category: 'Clothing',
-        quantity: 42,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1018',
-        code: '09zx9c0zc',
-        name: 'Painted Phone Case',
-        description: 'Product Description',
-        image: 'painted-phone-case.jpg',
-        price: 56,
-        category: 'Accessories',
-        quantity: 41,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1019',
-        code: 'mnb5mb2m5',
-        name: 'Pink Band',
-        description: 'Product Description',
-        image: 'pink-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 63,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1020',
-        code: 'r23fwf2w3',
-        name: 'Pink Purse',
-        description: 'Product Description',
-        image: 'pink-purse.jpg',
-        price: 110,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
-      },
-      {
-        id: '1021',
-        code: 'pxpzczo23',
-        name: 'Purple Band',
-        description: 'Product Description',
-        image: 'purple-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 6,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-      },
-      {
-        id: '1022',
-        code: '2c42cb5cb',
-        name: 'Purple Gemstone Necklace',
-        description: 'Product Description',
-        image: 'purple-gemstone-necklace.jpg',
-        price: 45,
-        category: 'Accessories',
-        quantity: 62,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1023',
-        code: '5k43kkk23',
-        name: 'Purple T-Shirt',
-        description: 'Product Description',
-        image: 'purple-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 5
-      },
-      {
-        id: '1024',
-        code: 'lm2tny2k4',
-        name: 'Shoes',
-        description: 'Product Description',
-        image: 'shoes.jpg',
-        price: 64,
-        category: 'Clothing',
-        quantity: 0,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1025',
-        code: 'nbm5mv45n',
-        name: 'Sneakers',
-        description: 'Product Description',
-        image: 'sneakers.jpg',
-        price: 78,
-        category: 'Clothing',
-        quantity: 52,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-      {
-        id: '1026',
-        code: 'zx23zc42c',
-        name: 'Teal T-Shirt',
-        description: 'Product Description',
-        image: 'teal-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 3,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-      },
-      {
-        id: '1027',
-        code: 'acvx872gc',
-        name: 'Yellow Earbuds',
-        description: 'Product Description',
-        image: 'yellow-earbuds.jpg',
-        price: 89,
-        category: 'Electronics',
-        quantity: 35,
-        inventoryStatus: 'INSTOCK',
-        rating: 3
-      },
-      {
-        id: '1028',
-        code: 'tx125ck42',
-        name: 'Yoga Mat',
-        description: 'Product Description',
-        image: 'yoga-mat.jpg',
-        price: 20,
-        category: 'Fitness',
-        quantity: 15,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1029',
-        code: 'gwuby345v',
-        name: 'Yoga Set',
-        description: 'Product Description',
-        image: 'yoga-set.jpg',
-        price: 20,
-        category: 'Fitness',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 8
+        type: 'Noun',
+        word: 'Follower',
+        meaningVN: 'Người theo dõi',
+        describe: 'A person who follows another in regard to his or her ideas or belief',
+        frequency: '4/10',
+        example: 'He has a large number of followers on social media.'
       }
+    ],
+    relatedWords: ['following', 'follow-up', 'follow through', 'follower', 'follow-on']
+  },
+  {
+    id: '7d3e4a9b',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
+    type: 'Verb',
+    word: 'Understand',
+    meaningVN: 'Hiểu',
+    describe: 'To grasp the meaning of; comprehend',
+    frequency: '9/10',
+    example: "I don't understand what you're saying.",
+    synonyms: ['comprehend', 'grasp', 'apprehend', 'perceive'],
+    antonyms: ['misunderstand', 'misinterpret', 'confuse', 'misperceive'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Understanding',
+        meaningVN: 'Hiểu biết',
+        describe: 'The ability to understand something; comprehension',
+        frequency: '8/10',
+        example: 'She has a deep understanding of the subject.'
+      },
+      {
+        type: 'Adjective',
+        word: 'Understandable',
+        meaningVN: 'Dễ hiểu',
+        describe: 'Capable of being understood; comprehensible',
+        frequency: '5/10',
+        example: 'The instructions are written in an understandable manner.'
+      },
+      {
+        type: 'Adverb',
+        word: 'Understandably',
+        meaningVN: 'Dễ hiểu',
+        describe: 'In a way that is easy to understand; understandably',
+        frequency: '4/10',
+        example: 'She was understandably upset about the situation.'
+      }
+    ],
+    relatedWords: [
+      'understanding',
+      'misunderstand',
+      'misunderstanding',
+      'understood',
+      'understandably'
     ]
   },
+  {
+    id: 'b2f5a1e9',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
 
-  getProductsWithOrdersData() {
-    return [
+    type: 'Verb',
+    word: 'Improve',
+    meaningVN: 'Cải thiện',
+    describe: 'To make or become better; to advance or grow',
+    frequency: '7/10',
+    example: 'She wants to improve her English skills.',
+    synonyms: ['enhance', 'upgrade', 'better', 'amend'],
+    antonyms: ['worsen', 'deteriorate', 'decline', 'regress'],
+    otherForms: [
       {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-        orders: [
-          {
-            id: '1000-0',
-            productCode: 'f230fh0g3',
-            date: '2020-09-13',
-            amount: 65,
-            quantity: 1,
-            customer: 'David James',
-            status: 'PENDING'
-          },
-          {
-            id: '1000-1',
-            productCode: 'f230fh0g3',
-            date: '2020-05-14',
-            amount: 130,
-            quantity: 2,
-            customer: 'Leon Rodrigues',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1000-2',
-            productCode: 'f230fh0g3',
-            date: '2019-01-04',
-            amount: 65,
-            quantity: 1,
-            customer: 'Juan Alejandro',
-            status: 'RETURNED'
-          },
-          {
-            id: '1000-3',
-            productCode: 'f230fh0g3',
-            date: '2020-09-13',
-            amount: 195,
-            quantity: 3,
-            customer: 'Claire Morrow',
-            status: 'CANCELLED'
-          }
-        ]
+        type: 'Noun',
+        word: 'Improvement',
+        meaningVN: 'Sự cải thiện',
+        describe: 'The act of improving or the state of being improved',
+        frequency: '7/10',
+        example: "There's been a significant improvement in his performance."
       },
       {
-        id: '1001',
-        code: 'nvklal433',
-        name: 'Black Watch',
-        description: 'Product Description',
-        image: 'black-watch.jpg',
-        price: 72,
-        category: 'Accessories',
-        quantity: 61,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1001-0',
-            productCode: 'nvklal433',
-            date: '2020-05-14',
-            amount: 72,
-            quantity: 1,
-            customer: 'Maisha Jefferson',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1001-1',
-            productCode: 'nvklal433',
-            date: '2020-02-28',
-            amount: 144,
-            quantity: 2,
-            customer: 'Octavia Murillo',
-            status: 'PENDING'
-          }
-        ]
+        type: 'Adjective',
+        word: 'Improved',
+        meaningVN: 'Đã cải thiện',
+        describe: 'Made or become better',
+        frequency: '6/10',
+        example: 'The new software includes improved features.'
       },
       {
-        id: '1002',
-        code: 'zz21cz3c1',
-        name: 'Blue Band',
-        description: 'Product Description',
-        image: 'blue-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1002-0',
-            productCode: 'zz21cz3c1',
-            date: '2020-07-05',
-            amount: 79,
-            quantity: 1,
-            customer: 'Stacey Leja',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1002-1',
-            productCode: 'zz21cz3c1',
-            date: '2020-02-06',
-            amount: 79,
-            quantity: 1,
-            customer: 'Ashley Wickens',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1003',
-        code: '244wgerg2',
-        name: 'Blue T-Shirt',
-        description: 'Product Description',
-        image: 'blue-t-shirt.jpg',
-        price: 29,
-        category: 'Clothing',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-        orders: []
-      },
-      {
-        id: '1004',
-        code: 'h456wer53',
-        name: 'Bracelet',
-        description: 'Product Description',
-        image: 'bracelet.jpg',
-        price: 15,
-        category: 'Accessories',
-        quantity: 73,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1004-0',
-            productCode: 'h456wer53',
-            date: '2020-09-05',
-            amount: 60,
-            quantity: 4,
-            customer: 'Mayumi Misaki',
-            status: 'PENDING'
-          },
-          {
-            id: '1004-1',
-            productCode: 'h456wer53',
-            date: '2019-04-16',
-            amount: 2,
-            quantity: 30,
-            customer: 'Francesco Salvatore',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1005',
-        code: 'av2231fwg',
-        name: 'Brown Purse',
-        description: 'Product Description',
-        image: 'brown-purse.jpg',
-        price: 120,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1005-0',
-            productCode: 'av2231fwg',
-            date: '2020-01-25',
-            amount: 120,
-            quantity: 1,
-            customer: 'Isabel Sinclair',
-            status: 'RETURNED'
-          },
-          {
-            id: '1005-1',
-            productCode: 'av2231fwg',
-            date: '2019-03-12',
-            amount: 240,
-            quantity: 2,
-            customer: 'Lionel Clifford',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1005-2',
-            productCode: 'av2231fwg',
-            date: '2019-05-05',
-            amount: 120,
-            quantity: 1,
-            customer: 'Cody Chavez',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1006',
-        code: 'bib36pfvm',
-        name: 'Chakra Bracelet',
-        description: 'Product Description',
-        image: 'chakra-bracelet.jpg',
-        price: 32,
-        category: 'Accessories',
-        quantity: 5,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1006-0',
-            productCode: 'bib36pfvm',
-            date: '2020-02-24',
-            amount: 32,
-            quantity: 1,
-            customer: 'Arvin Darci',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1006-1',
-            productCode: 'bib36pfvm',
-            date: '2020-01-14',
-            amount: 64,
-            quantity: 2,
-            customer: 'Izzy Jones',
-            status: 'PENDING'
-          }
-        ]
-      },
-      {
-        id: '1007',
-        code: 'mbvjkgip5',
-        name: 'Galaxy Earrings',
-        description: 'Product Description',
-        image: 'galaxy-earrings.jpg',
-        price: 34,
-        category: 'Accessories',
-        quantity: 23,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-        orders: [
-          {
-            id: '1007-0',
-            productCode: 'mbvjkgip5',
-            date: '2020-06-19',
-            amount: 34,
-            quantity: 1,
-            customer: 'Jennifer Smith',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1008',
-        code: 'vbb124btr',
-        name: 'Game Controller',
-        description: 'Product Description',
-        image: 'game-controller.jpg',
-        price: 99,
-        category: 'Electronics',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1008-0',
-            productCode: 'vbb124btr',
-            date: '2020-01-05',
-            amount: 99,
-            quantity: 1,
-            customer: 'Jeanfrancois David',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1008-1',
-            productCode: 'vbb124btr',
-            date: '2020-01-19',
-            amount: 198,
-            quantity: 2,
-            customer: 'Ivar Greenwood',
-            status: 'RETURNED'
-          }
-        ]
-      },
-      {
-        id: '1009',
-        code: 'cm230f032',
-        name: 'Gaming Set',
-        description: 'Product Description',
-        image: 'gaming-set.jpg',
-        price: 299,
-        category: 'Electronics',
-        quantity: 63,
-        inventoryStatus: 'INSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1009-0',
-            productCode: 'cm230f032',
-            date: '2020-06-24',
-            amount: 299,
-            quantity: 1,
-            customer: 'Kadeem Mujtaba',
-            status: 'PENDING'
-          },
-          {
-            id: '1009-1',
-            productCode: 'cm230f032',
-            date: '2020-05-11',
-            amount: 299,
-            quantity: 1,
-            customer: 'Ashley Wickens',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1009-2',
-            productCode: 'cm230f032',
-            date: '2019-02-07',
-            amount: 299,
-            quantity: 1,
-            customer: 'Julie Johnson',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1009-3',
-            productCode: 'cm230f032',
-            date: '2020-04-26',
-            amount: 299,
-            quantity: 1,
-            customer: 'Tony Costa',
-            status: 'CANCELLED'
-          }
-        ]
-      },
-      {
-        id: '1010',
-        code: 'plb34234v',
-        name: 'Gold Phone Case',
-        description: 'Product Description',
-        image: 'gold-phone-case.jpg',
-        price: 24,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1010-0',
-            productCode: 'plb34234v',
-            date: '2020-02-04',
-            amount: 24,
-            quantity: 1,
-            customer: 'James Butt',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1010-1',
-            productCode: 'plb34234v',
-            date: '2020-05-05',
-            amount: 48,
-            quantity: 2,
-            customer: 'Josephine Darakjy',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1011',
-        code: '4920nnc2d',
-        name: 'Green Earbuds',
-        description: 'Product Description',
-        image: 'green-earbuds.jpg',
-        price: 89,
-        category: 'Electronics',
-        quantity: 23,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1011-0',
-            productCode: '4920nnc2d',
-            date: '2020-06-01',
-            amount: 89,
-            quantity: 1,
-            customer: 'Art Venere',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1012',
-        code: '250vm23cc',
-        name: 'Green T-Shirt',
-        description: 'Product Description',
-        image: 'green-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 74,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-        orders: [
-          {
-            id: '1012-0',
-            productCode: '250vm23cc',
-            date: '2020-02-05',
-            amount: 49,
-            quantity: 1,
-            customer: 'Lenna Paprocki',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1012-1',
-            productCode: '250vm23cc',
-            date: '2020-02-15',
-            amount: 49,
-            quantity: 1,
-            customer: 'Donette Foller',
-            status: 'PENDING'
-          }
-        ]
-      },
-      {
-        id: '1013',
-        code: 'fldsmn31b',
-        name: 'Grey T-Shirt',
-        description: 'Product Description',
-        image: 'grey-t-shirt.jpg',
-        price: 48,
-        category: 'Clothing',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1013-0',
-            productCode: 'fldsmn31b',
-            date: '2020-04-01',
-            amount: 48,
-            quantity: 1,
-            customer: 'Simona Morasca',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1014',
-        code: 'waas1x2as',
-        name: 'Headphones',
-        description: 'Product Description',
-        image: 'headphones.jpg',
-        price: 175,
-        category: 'Electronics',
-        quantity: 8,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 5,
-        orders: [
-          {
-            id: '1014-0',
-            productCode: 'waas1x2as',
-            date: '2020-05-15',
-            amount: 175,
-            quantity: 1,
-            customer: 'Lenna Paprocki',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1014-1',
-            productCode: 'waas1x2as',
-            date: '2020-01-02',
-            amount: 175,
-            quantity: 1,
-            customer: 'Donette Foller',
-            status: 'CANCELLED'
-          }
-        ]
-      },
-      {
-        id: '1015',
-        code: 'vb34btbg5',
-        name: 'Light Green T-Shirt',
-        description: 'Product Description',
-        image: 'light-green-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 34,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1015-0',
-            productCode: 'vb34btbg5',
-            date: '2020-07-02',
-            amount: 98,
-            quantity: 2,
-            customer: 'Mitsue Tollner',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1016',
-        code: 'k8l6j58jl',
-        name: 'Lime Band',
-        description: 'Product Description',
-        image: 'lime-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 12,
-        inventoryStatus: 'INSTOCK',
-        rating: 3,
-        orders: []
-      },
-      {
-        id: '1017',
-        code: 'v435nn85n',
-        name: 'Mini Speakers',
-        description: 'Product Description',
-        image: 'mini-speakers.jpg',
-        price: 85,
-        category: 'Clothing',
-        quantity: 42,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1017-0',
-            productCode: 'v435nn85n',
-            date: '2020-07-12',
-            amount: 85,
-            quantity: 1,
-            customer: 'Minna Amigon',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1018',
-        code: '09zx9c0zc',
-        name: 'Painted Phone Case',
-        description: 'Product Description',
-        image: 'painted-phone-case.jpg',
-        price: 56,
-        category: 'Accessories',
-        quantity: 41,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-        orders: [
-          {
-            id: '1018-0',
-            productCode: '09zx9c0zc',
-            date: '2020-07-01',
-            amount: 56,
-            quantity: 1,
-            customer: 'Abel Maclead',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1018-1',
-            productCode: '09zx9c0zc',
-            date: '2020-05-02',
-            amount: 56,
-            quantity: 1,
-            customer: 'Minna Amigon',
-            status: 'RETURNED'
-          }
-        ]
-      },
-      {
-        id: '1019',
-        code: 'mnb5mb2m5',
-        name: 'Pink Band',
-        description: 'Product Description',
-        image: 'pink-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 63,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: []
-      },
-      {
-        id: '1020',
-        code: 'r23fwf2w3',
-        name: 'Pink Purse',
-        description: 'Product Description',
-        image: 'pink-purse.jpg',
-        price: 110,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1020-0',
-            productCode: 'r23fwf2w3',
-            date: '2020-05-29',
-            amount: 110,
-            quantity: 1,
-            customer: 'Kiley Caldarera',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1020-1',
-            productCode: 'r23fwf2w3',
-            date: '2020-02-11',
-            amount: 220,
-            quantity: 2,
-            customer: 'Graciela Ruta',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1021',
-        code: 'pxpzczo23',
-        name: 'Purple Band',
-        description: 'Product Description',
-        image: 'purple-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 6,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1021-0',
-            productCode: 'pxpzczo23',
-            date: '2020-02-02',
-            amount: 79,
-            quantity: 1,
-            customer: 'Cammy Albares',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1022',
-        code: '2c42cb5cb',
-        name: 'Purple Gemstone Necklace',
-        description: 'Product Description',
-        image: 'purple-gemstone-necklace.jpg',
-        price: 45,
-        category: 'Accessories',
-        quantity: 62,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1022-0',
-            productCode: '2c42cb5cb',
-            date: '2020-06-29',
-            amount: 45,
-            quantity: 1,
-            customer: 'Mattie Poquette',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1022-1',
-            productCode: '2c42cb5cb',
-            date: '2020-02-11',
-            amount: 135,
-            quantity: 3,
-            customer: 'Meaghan Garufi',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1023',
-        code: '5k43kkk23',
-        name: 'Purple T-Shirt',
-        description: 'Product Description',
-        image: 'purple-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 5,
-        orders: [
-          {
-            id: '1023-0',
-            productCode: '5k43kkk23',
-            date: '2020-04-15',
-            amount: 49,
-            quantity: 1,
-            customer: 'Gladys Rim',
-            status: 'RETURNED'
-          }
-        ]
-      },
-      {
-        id: '1024',
-        code: 'lm2tny2k4',
-        name: 'Shoes',
-        description: 'Product Description',
-        image: 'shoes.jpg',
-        price: 64,
-        category: 'Clothing',
-        quantity: 0,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: []
-      },
-      {
-        id: '1025',
-        code: 'nbm5mv45n',
-        name: 'Sneakers',
-        description: 'Product Description',
-        image: 'sneakers.jpg',
-        price: 78,
-        category: 'Clothing',
-        quantity: 52,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1025-0',
-            productCode: 'nbm5mv45n',
-            date: '2020-02-19',
-            amount: 78,
-            quantity: 1,
-            customer: 'Yuki Whobrey',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1025-1',
-            productCode: 'nbm5mv45n',
-            date: '2020-05-21',
-            amount: 78,
-            quantity: 1,
-            customer: 'Fletcher Flosi',
-            status: 'PENDING'
-          }
-        ]
-      },
-      {
-        id: '1026',
-        code: 'zx23zc42c',
-        name: 'Teal T-Shirt',
-        description: 'Product Description',
-        image: 'teal-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 3,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1026-0',
-            productCode: 'zx23zc42c',
-            date: '2020-04-24',
-            amount: 98,
-            quantity: 2,
-            customer: 'Bette Nicka',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1027',
-        code: 'acvx872gc',
-        name: 'Yellow Earbuds',
-        description: 'Product Description',
-        image: 'yellow-earbuds.jpg',
-        price: 89,
-        category: 'Electronics',
-        quantity: 35,
-        inventoryStatus: 'INSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1027-0',
-            productCode: 'acvx872gc',
-            date: '2020-01-29',
-            amount: 89,
-            quantity: 1,
-            customer: 'Veronika Inouye',
-            status: 'DELIVERED'
-          },
-          {
-            id: '1027-1',
-            productCode: 'acvx872gc',
-            date: '2020-06-11',
-            amount: 89,
-            quantity: 1,
-            customer: 'Willard Kolmetz',
-            status: 'DELIVERED'
-          }
-        ]
-      },
-      {
-        id: '1028',
-        code: 'tx125ck42',
-        name: 'Yoga Mat',
-        description: 'Product Description',
-        image: 'yoga-mat.jpg',
-        price: 20,
-        category: 'Fitness',
-        quantity: 15,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-        orders: []
-      },
-      {
-        id: '1029',
-        code: 'gwuby345v',
-        name: 'Yoga Set',
-        description: 'Product Description',
-        image: 'yoga-set.jpg',
-        price: 20,
-        category: 'Fitness',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 8,
-        orders: [
-          {
-            id: '1029-0',
-            productCode: 'gwuby345v',
-            date: '2020-02-14',
-            amount: 4,
-            quantity: 80,
-            customer: 'Maryann Royster',
-            status: 'DELIVERED'
-          }
-        ]
+        type: 'Adverb',
+        word: 'Improvingly',
+        meaningVN: 'Một cách cải thiện',
+        describe: 'In a way that shows improvement or progress',
+        frequency: '3/10',
+        example: 'His grades are improvingly slowly.'
       }
+    ],
+    relatedWords: ['improvement', 'improvised', 'improvisation', 'improvisational', 'improvingly']
+  },
+  {
+    id: '1a6b5c8d',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
+
+    type: 'Verb',
+    word: 'Communicate',
+    meaningVN: 'Giao tiếp',
+    describe: 'To impart information about; to make known',
+    frequency: '8/10',
+    example: "It's important to communicate effectively in a team.",
+    synonyms: ['convey', 'transmit', 'share', 'correspond'],
+    antonyms: ['conceal', 'hide', 'withhold', 'suppress'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Communication',
+        meaningVN: 'Giao tiếp',
+        describe: 'The imparting or exchanging of information or news',
+        frequency: '9/10',
+        example: 'Good communication is essential in any relationship.'
+      },
+      {
+        type: 'Adjective',
+        word: 'Communicative',
+        meaningVN: 'Có tính giao tiếp',
+        describe: 'Willing to communicate; talkative',
+        frequency: '6/10',
+        example: "She's a very communicative person."
+      }
+    ],
+    relatedWords: [
+      'communication',
+      'communicator',
+      'communicative',
+      'uncommunicative',
+      'miscommunication'
     ]
   },
+  {
+    id: 'e9f2b4d7',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
 
-  getProductsMini() {
-    return Promise.resolve(this.getProductsData().slice(0, 5))
+    type: 'Verb',
+    word: 'Attend',
+    meaningVN: 'Tham dự',
+    describe: 'To be present at; to deal with or take charge of; to apply oneself',
+    frequency: '7/10',
+    example: 'Will you attend the meeting tomorrow?',
+    synonyms: ['participate', 'join', 'appear', 'contribute'],
+    antonyms: ['skip', 'avoid', 'ignore', 'neglect'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Attendance',
+        meaningVN: 'Sự tham dự',
+        describe: 'The action or state of going regularly to or being present at a place or event',
+        frequency: '6/10',
+        example: 'Attendance at the conference was lower than expected.'
+      }
+    ],
+    relatedWords: ['attendance', 'attendee', 'attendant', 'attended', 'attending']
   },
+  {
+    id: '3e7b2c5d',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
 
-  getProductsSmall() {
-    return Promise.resolve(this.getProductsData().slice(0, 10))
+    type: 'Verb',
+    word: 'Continue',
+    meaningVN: 'Tiếp tục',
+    describe: 'To persist in an activity or process; to keep up or maintain',
+    frequency: '8/10',
+    example: 'Please continue with your work.',
+    synonyms: ['persist', 'proceed', 'persevere', 'maintain'],
+    antonyms: ['stop', 'cease', 'discontinue', 'end'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Continuation',
+        meaningVN: 'Sự tiếp tục',
+        describe:
+          'The action of carrying something on over a period of time or the process of being carried on',
+        frequency: '6/10',
+        example: 'The continuation of the project depends on funding.'
+      }
+    ],
+    relatedWords: ['continuation', 'continued', 'continuing', 'continuous', 'continuously']
   },
+  {
+    id: '4c9a7b3d',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
 
-  getProducts() {
-    return Promise.resolve(this.getProductsData())
+    type: 'Verb',
+    word: 'Announce',
+    meaningVN: 'Thông báo',
+    describe: 'To make known publicly or officially; to declare',
+    frequency: '7/10',
+    example: 'The company announced its new product launch.',
+    synonyms: ['declare', 'proclaim', 'publish', 'broadcast'],
+    antonyms: ['conceal', 'withhold', 'keep secret', 'suppress'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Announcement',
+        meaningVN: 'Thông báo',
+        describe: 'A formal public statement about a fact, occurrence, or intention',
+        frequency: '6/10',
+        example: 'The announcement of the winner will be made next week.'
+      }
+    ],
+    relatedWords: ['announcement', 'announcer', 'announced', 'announcing', 'unannounced']
   },
+  {
+    id: '4c9a7bw3d',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
 
-  getProductsWithOrdersSmall() {
-    return Promise.resolve(this.getProductsWithOrdersData().slice(0, 10))
+    type: 'Verb',
+    word: 'Revise',
+    meaningVN: 'Sửa đổi',
+    describe: 'To reconsider and change or modify',
+    frequency: '6/10',
+    example: 'She revised her essay before submitting it.',
+    synonyms: ['amend', 'alter', 'modify', 'review'],
+    antonyms: ['leave unchanged', 'maintain', 'preserve', 'keep'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Revision',
+        meaningVN: 'Sự sửa đổi',
+        describe: 'A change or set of changes made to something',
+        frequency: '5/10',
+        example: 'The novel went through several revisions before publication.'
+      }
+    ],
+    relatedWords: ['revision', 'revised', 'revising', 'revisable', 'irrevisable']
   },
+  {
+    id: '4c9aw7bw3d',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
 
-  getProductsWithOrders() {
-    return Promise.resolve(this.getProductsWithOrdersData())
+    type: 'Verb',
+    word: 'Enroll',
+    meaningVN: 'Ghi danh',
+    describe: 'To officially register as a member of an institution or a course',
+    frequency: '5/10',
+    example: 'Students can enroll for the course online.',
+    synonyms: ['register', 'sign up', 'join', 'enlist'],
+    antonyms: ['withdraw', 'drop out', 'resign', 'cancel'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Enrollment',
+        meaningVN: 'Sự ghi danh',
+        describe: 'The action of enrolling or being enrolled',
+        frequency: '4/10',
+        example: 'Enrollment for the program closes next week.'
+      },
+      {
+        type: 'Adjective',
+        word: 'Enrollable',
+        meaningVN: 'Có thể ghi danh',
+        describe: 'Capable of being enrolled',
+        frequency: '3/10',
+        example: 'The online course is enrollable at any time.'
+      }
+    ],
+    relatedWords: ['enrollment', 'enrolled', 'enrolling', 'enrollable', 'unenrollable']
+  },
+  {
+    id: '4c9awe7bw3d',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
+
+    type: 'Verb',
+    word: 'Succeed',
+    meaningVN: 'Thành công',
+    describe: 'To accomplish something desired or intended; to achieve success',
+    frequency: '8/10',
+    example: 'She worked hard to succeed in her career.',
+    synonyms: ['achieve', 'accomplish', 'attain', 'prosper'],
+    antonyms: ['fail', 'lose', 'fall short', 'underachieve'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Success',
+        meaningVN: 'Thành công',
+        describe: 'The accomplishment of an aim or purpose',
+        frequency: '9/10',
+        example: 'His success in the competition was celebrated by everyone.'
+      },
+      {
+        type: 'Adjective',
+        word: 'Successful',
+        meaningVN: 'Thành công',
+        describe: 'Accomplishing an aim or purpose',
+        frequency: '9/10',
+        example: "She's a successful businesswoman."
+      },
+      {
+        type: 'Adverb',
+        word: 'Successfully',
+        meaningVN: 'Thành công',
+        describe: 'In a successful manner; with success',
+        frequency: '7/10',
+        example: 'The project was completed successfully.'
+      }
+    ],
+    relatedWords: ['success', 'successful', 'successfully', 'unsuccessful', 'successor']
+  },
+  {
+    id: '4c9awe7wbw3d',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
+
+    type: 'Verb',
+    word: 'Memorise',
+    meaningVN: 'Nhớ',
+    describe: 'To commit to memory; to learn by heart',
+    frequency: '4/10',
+    example: 'She memorized the poem for the recitation.',
+    synonyms: ['learn', 'study', 'commit to memory', 'recite'],
+    antonyms: ['forget', 'unlearn', 'ignore', 'neglect'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Memorization',
+        meaningVN: 'Sự nhớ',
+        describe: 'The action or process of committing something to memory',
+        frequency: '3/10',
+        example: 'Memorization techniques can help with learning.'
+      }
+    ],
+    relatedWords: ['memorization', 'memorized', 'memorizing', 'memorable', 'memorably']
+  },
+  {
+    id: '4c9awe7wbew3d',
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
+
+    type: 'Verb',
+    word: 'Call',
+    meaningVN: 'Gọi',
+    describe: 'To cry out in a loud voice; to summon or attract (someone) by shouting',
+    frequency: '9/10',
+    example: 'She called her friend to ask for help.',
+    synonyms: ['shout', 'yell', 'scream', 'holler'],
+    antonyms: ['whisper', 'murmur', 'mutter', 'mumble'],
+    otherForms: [
+      {
+        type: 'Noun',
+        word: 'Call',
+        meaningVN: 'Cuộc gọi',
+        describe: 'A brief visit or short stay at a place',
+        frequency: '6/10',
+        example: "I'll give you a call when I arrive."
+      },
+      {
+        type: 'Adjective',
+        word: 'Callable',
+        meaningVN: 'Có thể gọi',
+        describe: 'Capable of being called or summoned',
+        frequency: '4/10',
+        example: 'The hotline number is callable at any time.'
+      }
+    ],
+    relatedWords: ['caller', 'call-in', 'callback', 'called', 'calling']
   }
-}
+]

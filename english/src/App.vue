@@ -1,6 +1,8 @@
 <template>
   <div>
-    <the-header abc="hihihi" />
+    <toast />
+    <confirm-dialog></confirm-dialog>
+    <the-header />
     <router-view></router-view>
     <the-auth />
   </div>

@@ -1,5 +1,9 @@
 import { Form, Field, defineRule, ErrorMessage, configure } from 'vee-validate'
+<<<<<<< HEAD
 import { required, email, min, max, confirmed, numeric } from '@vee-validate/rules'
+=======
+import { required, email, min, max, confirmed, numeric, alpha, url } from '@vee-validate/rules'
+>>>>>>> 8e55c3e81062bffb8c80b8a412f371be758d3f23
 
 export default {
   install(app) {
@@ -14,6 +18,11 @@ export default {
     defineRule('email', email)
     defineRule('confirmed', confirmed)
     defineRule('numeric', numeric)
+<<<<<<< HEAD
+=======
+    defineRule('alpha', alpha)
+    defineRule('url', url)
+>>>>>>> 8e55c3e81062bffb8c80b8a412f371be758d3f23
 
     configure({
       generateMessage(ctx) {
