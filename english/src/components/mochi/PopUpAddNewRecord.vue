@@ -53,26 +53,7 @@
           />
         </div>
         <div v-else>
-          <!-- <vee-form @submit="handleAddNewRecord">
-            <div>
-              <label class="inline-block mb-2">Age</label>
-              <vee-field
-                :validateOnInput="true"
-                type="text"
-                name="seachText"
-                class="grow-[8] block py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-                placeholder="Word"
-              />
-              <error-message class="text-red-700" name="seachText"></error-message>
-            </div>
-          </vee-form> -->
-          <new-form></new-form>
-          <pre>{{ dataRetrieveFromGPT }}</pre>
-          <Button
-            style="padding: 10px 10px"
-            label="Add this data"
-            @click="handleAddDataFromChatGPT"
-          />
+          <new-form :handleAddDataFromChatGPT="handleAddDataFromChatGPT"></new-form>
         </div>
       </div>
     </the-dialog>
@@ -113,11 +94,11 @@ export default {
     NewForm
   },
   methods: {
-    async handleSearchChatGPT(dataInput) {
+    async handleSearchChatGPT(dataInput = 'hello') {
       this.UIState = { ...this.UIState, isSubmitting: true }
       try {
         let promt = `I'm learning English, when I enter an English word, please find me words of other types (Verb, Noun, Adj, Adv, ...) of it,
-                please find me the word "take" and give me json form like below, please set id as milisecond timesteamp current:
+                please find me the word "${dataInput}" and give me json form like below, please set id as milisecond timesteamp current:
                 "
                 {
                     id: '5c8d9e2a',
@@ -144,10 +125,11 @@ export default {
                 }
                 "`
         // const data = await this.callChatGPTAPI(promt)
-        // await mockCallAPI(dataInput)
+        await mockCallAPI(dataInput)
         const data = {
           id: '1632376619299',
-          image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUyAfXfniYfSTZ7Z2HjW2COSyC8WTH3TgkGw&usqp=CAU',
           type: 'Verb',
           word: 'Take',
           meaningVN: 'Lấy',
@@ -190,7 +172,7 @@ export default {
           {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Bearer ' // Thay YOUR_API_KEY bằng mã thông báo xác thực của bạn
+              Authorization: `Bearer ${import.meta.env.VITE_APP_KEY_CHATGPT}` // Thay YOUR_API_KEY bằng mã thông báo xác thực của bạn
             }
           }
         )

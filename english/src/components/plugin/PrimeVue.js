@@ -201,9 +201,6 @@ export default {
     app.component('VirtualScroller', VirtualScroller)
 
     app.use(ToastService)
-<<<<<<< HEAD
-=======
     app.use(ConfirmationService)
->>>>>>> 8e55c3e81062bffb8c80b8a412f371be758d3f23
   }
 }
