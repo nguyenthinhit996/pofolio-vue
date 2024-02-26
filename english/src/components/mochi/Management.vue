@@ -252,8 +252,9 @@ export default {
       this.products.splice(index, 1)
     },
     handleAddNewRecord(data) {
-      const obj = JSON.parse(data)
-      this.products.unshift(obj)
+      console.log('handleAddNewRecord', data)
+      // const obj = JSON.parse(data)
+      this.products.unshift(data)
     },
     confirm1(slotProps) {
       this.$confirm.require({

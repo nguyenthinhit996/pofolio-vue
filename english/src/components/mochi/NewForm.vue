@@ -1,5 +1,6 @@
 <template>
   <vee-form
+    ref="registerForm"
     :initial-values="formData"
     v-if="tab === 'register'"
     :validation-schema="schema"
@@ -29,7 +30,7 @@
       <div class="mb-3 w-5 grow-[1]">
         <label class="block mb-2">Type</label>
         <Dropdown
-          :modelValue="values.type?.toLowerCase()"
+          :modelValue="values?.type?.toLowerCase()"
           :options="statuses"
           optionLabel="label"
           optionValue="value"
@@ -124,7 +125,7 @@
       >
         <input
           @input="(event) => handleChangeFieldArrayText(event, handleChange)"
-          :value="field.value.map((item) => ' ' + item)"
+          :value="field.value?.map((item) => ' ' + item)"
           class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         />
       </vee-field>
@@ -142,7 +143,7 @@
       >
         <input
           @input="(event) => handleChangeFieldArrayText(event, handleChange)"
-          :value="field.value.map((item) => ' ' + item)"
+          :value="field.value?.map((item) => ' ' + item)"
           class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         />
       </vee-field>
@@ -169,7 +170,7 @@
         >
           <template #header>
             <div class="w-full flex flex-row justify-between items-center relative z-1">
-              <p>{{ form.type + ' - ' + form.word }}</p>
+              <p>{{ form?.type + ' - ' + form.word }}</p>
               <Button
                 icon="pi pi-trash"
                 rounded
@@ -268,7 +269,7 @@
       >
         <input
           @input="(event) => handleChangeFieldArrayText(event, handleChange)"
-          :value="field.value.map((item) => ' ' + item)"
+          :value="field.value?.map((item) => ' ' + item)"
           class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         />
       </vee-field>
@@ -277,50 +278,24 @@
 
     <div class="flex flex-row justify-end gap-4">
       <Button style="padding: 10px 10px" label="Reset changes" @click="handleReset" />
-      <Button type="submit" style="padding: 10px 10px" label="Adding this data" />
+      <Button
+        type="submit"
+        style="padding: 10px 10px"
+        label="Adding this data"
+        :disabled="!isEmptyCheck(errors)"
+      />
     </div>
   </vee-form>
 </template>
 
 <script>
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 
 export default {
   name: 'NewForm',
   data() {
     return {
       tab: 'register',
-      formData: {
-        image:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUyAfXfniYfSTZ7Z2HjW2COSyC8WTH3TgkGw&usqp=CAU',
-        type: 'Verb',
-        word: 'Follow',
-        meaningVN: 'Theo dõi',
-        describe: 'To come after (something) in time or order; to pursue as a guide',
-        frequency: '6/10',
-        example: 'Please follow the instructions carefully.',
-        synonyms: ['grab', 'seize', 'get hold of', 'acquire'],
-        antonyms: ['give', 'release', 'surrender', 'relinquish'],
-        otherForms: [
-          {
-            type: 'Noun',
-            word: 'Taker',
-            meaningVN: 'Người lấy',
-            describe: 'A person who takes or receives something',
-            frequency: '5/10',
-            example: 'He is a ruthless taker and will do anything to gain power.'
-          },
-          {
-            type: 'Noun',
-            word: 'Taker',
-            meaningVN: 'Người lấy',
-            describe: 'A person who takes or receives something',
-            frequency: '5/10',
-            example: 'He is a ruthless taker and will do anything to gain power.'
-          }
-        ],
-        relatedWords: ['taking', 'taken', 'taker', 'takeoff', 'takeout']
-      },
       abc: 'noun',
       schema: {
         image: 'required|url',
@@ -339,6 +314,9 @@ export default {
     }
   },
   methods: {
+    isEmptyCheck(data) {
+      return isEmpty(data)
+    },
     handAddOrtherForm(values = {}, setFieldValueCB) {
       const newRecord = {
         type: 'Noun',
@@ -372,12 +350,12 @@ export default {
       handleChanegCB(event?.target?.value?.split(',')?.map((word) => word.trim()))
     },
     async handleSubmit(data) {
-      // const isValid = await this.$refs.registerForm.validate()
-      // if (!isValid) return
       console.log('handleSubmit')
-      console.log(data)
+      const isValid = await this.$refs.registerForm.validate()
+      if (!isValid) return
 
-      // Handle form submission logic here
+      console.log(data)
+      this.handleAddDataFromChatGPTCB(data)
     },
     getOrderSeverity(status) {
       switch (status) {
@@ -397,6 +375,44 @@ export default {
           return null
       }
     }
+  },
+  props: {
+    formData: {
+      type: Object,
+      default: () => ({
+        image:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUyAfXfniYfSTZ7Z2HjW2COSyC8WTH3TgkGw&usqp=CAU',
+        type: 'Verb',
+        word: 'Follow',
+        meaningVN: 'Theo dõi',
+        describe: 'To come after (something) in time or order; to pursue as a guide',
+        frequency: '6/10',
+        example: 'Please follow the instructions carefully.',
+        synonyms: ['grab', 'seize', 'get hold of', 'acquire'],
+        antonyms: ['give', 'release', 'surrender', 'relinquish'],
+        otherForms: [
+          {
+            type: 'Noun',
+            word: 'Taker',
+            meaningVN: 'Người lấy',
+            describe: 'A person who takes or receives something',
+            frequency: '5/10',
+            example: 'He is a ruthless taker and will do anything to gain power.'
+          },
+          {
+            type: 'Noun',
+            word: 'Taker',
+            meaningVN: 'Người lấy',
+            describe: 'A person who takes or receives something',
+            frequency: '5/10',
+            example: 'He is a ruthless taker and will do anything to gain power.'
+          }
+        ],
+        relatedWords: ['taking', 'taken', 'taker', 'takeoff', 'takeout']
+      })
+    },
+
+    handleAddDataFromChatGPTCB: { type: Function, required: true }
   }
 }
 </script>

@@ -53,7 +53,10 @@
           />
         </div>
         <div v-else>
-          <new-form :handleAddDataFromChatGPT="handleAddDataFromChatGPT"></new-form>
+          <new-form
+            :handleAddDataFromChatGPTCB="handleAddDataFromChatGPT"
+            :formData="dataRetrieveFromGPT"
+          ></new-form>
         </div>
       </div>
     </the-dialog>
@@ -95,64 +98,99 @@ export default {
   },
   methods: {
     async handleSearchChatGPT(dataInput = 'hello') {
+      const seachText = dataInput?.seachText || 'invalidword'
       this.UIState = { ...this.UIState, isSubmitting: true }
       try {
-        let promt = `I'm learning English, when I enter an English word, please find me words of other types (Verb, Noun, Adj, Adv, ...) of it,
-                please find me the word "${dataInput}" and give me json form like below, please set id as milisecond timesteamp current:
+        let promt = `I'm learning English, when I enter an English word, please help me to find the words of other types (Verb, Noun, Adjective, Adverb, ...) of it,
+                please help me to find the word "${seachText}" and give me a format JSON form like below, please set id as milisecond timesteamp current:
                 "
                 {
-                    id: '5c8d9e2a',
-                    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
-                    type: 'Verb',
-                    word: 'Follow',
-                    meaningVN: 'Theo dõi',
-                    describe: 'To come after (something) in time or order; to pursue as a guide',
-                    frequency: '6/10',
-                    example: 'Please follow the instructions carefully.',
-                    synonyms: ['pursue', 'chase', 'trail', 'shadow'],
-                    antonyms: ['lead', 'precede', 'guide', 'direct'],
-                    otherForms: [
+                    "id": "5555553233",
+                    "image": "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
+                    "type": "Verb",
+                    "word": "Follow",
+                    "meaningVN": "Theo dõi",
+                    "describe": "To come after (something) in time or order; to pursue as a guide",
+                    "frequency": "6/10",
+                    "example": "Please follow the instructions carefully.",
+                    "synonyms": ["pursue", "chase", "trail", "shadow"],
+                    "antonyms": ["lead", "precede", "guide", "direct"],
+                    "otherForms": [
                     {
-                        type: 'Noun',
-                        word: 'Follower',
-                        meaningVN: 'Người theo dõi',
-                        describe: 'A person who follows another in regard to his or her ideas or belief',
-                        frequency: '4/10',
-                        example: 'He has a large number of followers on social media.'
+                        "type": "Noun",
+                        "word": "Follower",
+                        "meaningVN": "Người theo dõi",
+                        "describe": "A person who follows another in regard to his or her ideas or belief",
+                        "frequency": "4/10",
+                        "example": "He has a large number of followers on social media."
                     }
                     ],
-                    relatedWords: ['following', 'follow-up', 'follow through', 'follower', 'follow-on']
+                    "relatedWords": ["following", "follow-up", "follow through", "follower", "follow-on"]
                 }
-                "`
-        // const data = await this.callChatGPTAPI(promt)
-        await mockCallAPI(dataInput)
-        const data = {
-          id: '1632376619299',
-          image:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUyAfXfniYfSTZ7Z2HjW2COSyC8WTH3TgkGw&usqp=CAU',
-          type: 'Verb',
-          word: 'Take',
-          meaningVN: 'Lấy',
-          describe: "To lay hold of (something) with one's hands; to get into one's possession",
-          frequency: '8/10',
-          example: 'Please take a seat and make yourself comfortable.',
-          synonyms: ['grab', 'seize', 'get hold of', 'acquire'],
-          antonyms: ['give', 'release', 'surrender', 'relinquish'],
-          otherForms: [
-            {
-              type: 'Noun',
-              word: 'Taker',
-              meaningVN: 'Người lấy',
-              describe: 'A person who takes or receives something',
-              frequency: '5/10',
-              example: 'He is a ruthless taker and will do anything to gain power.'
-            }
-          ],
-          relatedWords: ['taking', 'taken', 'taker', 'takeoff', 'takeout']
+                ". 
+                if the word "${seachText}" is typo or anything else result please return back follow format JSON like:
+                "{
+                	"result": false,
+                	"suggestionWord": [ this word you suggest ]
+                }"`
+        const data = await this.callChatGPTAPI(promt)
+        // await mockCallAPI(dataInput)
+        // const data = {
+        //   id: '1635948662348',
+        //   image: 'https://cdn.pixabay.com/photo/2017/05/23/17/12/kingfisher-2332318_1280.jpg',
+        //   type: 'Verb',
+        //   word: 'Organize',
+        //   meaningVN: 'Tổ chức',
+        //   describe:
+        //     'To arrange or order things systematically; to coordinate the elements of (a situation) to produce a desired effect',
+        //   frequency: '8/10',
+        //   example: 'She organized her schedule for the upcoming week.',
+        //   synonyms: ['arrange', 'systematize', 'coordinate', 'manage'],
+        //   antonyms: ['disorganize', 'disarrange', 'disturb', 'mess up'],
+        //   otherForms: [
+        //     {
+        //       type: 'Noun',
+        //       word: 'Organization',
+        //       meaningVN: 'Tổ chức',
+        //       describe:
+        //         'An organized group of people with a common purpose, such as a business or government department',
+        //       frequency: '7/10',
+        //       example: 'The non-profit organization helps underprivileged children.'
+        //     },
+        //     {
+        //       type: 'Adjective',
+        //       word: 'Organized',
+        //       meaningVN: 'Được tổ chức',
+        //       describe: 'Arranged systematically; orderly',
+        //       frequency: '9/10',
+        //       example: 'Her organized workspace allows her to be more productive.'
+        //     }
+        //   ],
+        //   relatedWords: [
+        //     'organization',
+        //     'organizer',
+        //     'disorganize',
+        //     'reorganize',
+        //     'disorganization'
+        //   ]
+        // }
+
+        if (data.includes('"result": false,\n')) {
+          this.UIState = {
+            ...this.UIState,
+            isSubmitting: false,
+            isGoodResult: false
+          }
+        } else {
+          this.UIState = {
+            ...this.UIState,
+            isSubmitting: false,
+            isGoodResult: true
+          }
+          this.dataRetrieveFromGPT = JSON.parse(data)
         }
-        this.dataRetrieveFromGPT = data
-        this.UIState = { ...this.UIState, isGoodResult: true }
       } catch (e) {
+        console.log(e)
         this.UIState = { ...this.UIState, isGoodResult: false }
       } finally {
         this.UIState = { ...this.UIState, isSubmitting: false }
@@ -183,10 +221,15 @@ export default {
         console.error('Đã xảy ra lỗi:', error)
       }
     },
-    handleAddDataFromChatGPT() {
-      console.log(this.dataRetrieveFromGPT)
-      this.$emit('event-add-record', this.dataRetrieveFromGPT)
+    handleAddDataFromChatGPT(data) {
+      console.log('handleAddDataFromChatGPT', data)
+      this.$emit('event-add-record', data)
       this.closePopupCB()
+      this.$toast.add({
+        severity: 'success',
+        summary: 'Add record successfully',
+        life: 3000
+      })
     }
   }
 }
