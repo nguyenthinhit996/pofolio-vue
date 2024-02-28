@@ -36,7 +36,13 @@
       <Column expander style="width: 5rem" />
 
       <Column header="Image" #body="slotProps">
-        <img :src="slotProps.data.image" :alt="slotProps.data.name" class="shadow-lg" width="64" />
+        <Image
+          :src="slotProps.data.image"
+          :alt="slotProps.data.name"
+          class="shadow-lg"
+          width="150px"
+          preview
+        />
       </Column>
 
       <Column field="word" header="Word" #body="slotProps" sortable>
@@ -138,6 +144,8 @@
 import { getVocabolaryByAccount } from '@/service/ProductService'
 import HiddenTemplate from '@/components/mochi/HiddenTemplate.vue'
 import PopUpAddNewRecord from '@/components/mochi/PopUpAddNewRecord.vue'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '@/service/Firebase'
 
 export default {
   data() {
@@ -149,7 +157,9 @@ export default {
     }
   },
   async mounted() {
-    this.products = getVocabolaryByAccount
+    const querySnapshot = await getDocs(collection(db, 'cities'))
+    console.log('mounted', querySnapshot)
+    // this.products = docSnap
   },
   methods: {
     handOpenPop() {
@@ -254,7 +264,7 @@ export default {
     handleAddNewRecord(data) {
       console.log('handleAddNewRecord', data)
       // const obj = JSON.parse(data)
-      this.products.unshift(data)
+      // this.products.unshift(data)
     },
     confirm1(slotProps) {
       this.$confirm.require({

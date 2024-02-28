@@ -16,6 +16,7 @@
   "dependencies": {
     "@vee-validate/rules": "^4.12.5",
     "chart.js": "^4.4.1",
+    "firebase": "^10.8.0",
     "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "primeicons": "^6.0.1",

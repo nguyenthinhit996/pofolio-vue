@@ -1,4 +1,9 @@
 <template>
+  <ThePopupChooseImage
+    :visiblePopUp="visiblePopUpAddChooseImage"
+    :closePopupCB="handleThePopupChooseImage"
+    :query="formData.word"
+  />
   <vee-form
     ref="registerForm"
     :initial-values="formData"
@@ -23,6 +28,11 @@
       </div>
 
       <Image width="250" height="250" :src="values.image" alt="Image" preview />
+      <Button
+        style="padding: 10px 10px"
+        label="Choose Other Image"
+        @click="visiblePopUpAddChooseImage = true"
+      />
     </div>
 
     <div class="flex flex-row justify-start gap-2">
@@ -290,6 +300,8 @@
 
 <script>
 import { cloneDeep, isEmpty } from 'lodash'
+import { doc, setDoc } from 'firebase/firestore'
+import { db } from '@/service/Firebase'
 
 export default {
   name: 'NewForm',
@@ -310,7 +322,8 @@ export default {
         { label: 'Noun', value: 'noun' },
         { label: 'Verb', value: 'verb' },
         { label: 'Adjective', value: 'adjective' }
-      ]
+      ],
+      visiblePopUpAddChooseImage: false
     }
   },
   methods: {
@@ -356,6 +369,13 @@ export default {
 
       console.log(data)
       this.handleAddDataFromChatGPTCB(data)
+
+      // Create a new document in Firestore with the ID
+      const { id } = data || {}
+      const dataResolve = await setDoc(doc(db, 'vocabularies', id), {
+        ...data
+      })
+      console.log('Firestore setDoc', dataResolve)
     },
     getOrderSeverity(status) {
       switch (status) {
@@ -373,6 +393,14 @@ export default {
 
         default:
           return null
+      }
+    },
+    handleThePopupChooseImage(url) {
+      this.visiblePopUpAddChooseImage = false
+      console.log(url)
+      console.log(this.$refs.registerForm)
+      if (url) {
+        this.$refs?.registerForm?.setFieldValue('image', url)
       }
     }
   },

@@ -3,7 +3,7 @@
     <div
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
-      <div class="fixed inset-0 transition-opacity" @click.prevent="handleClickOutside">
+      <div class="fixed inset-0 transition-opacity">
         <div class="absolute inset-0 bg-gray-800 opacity-75"></div>
       </div>
 
@@ -56,24 +56,35 @@
           </p>
 
           <!-- Login Form -->
-          <form v-if="tab === 'login'">
+          <vee-form
+            ref="loginFrom"
+            v-if="tab === 'login'"
+            @submit="loginUser"
+            :validation-schema="schemaLoginForm"
+            v-slot="{ ...rest }"
+          >
+            {{ console.log(rest) }}
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
-              <input
+              <vee-field
+                name="email"
                 type="email"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Enter Email"
               />
+              <error-message class="text-red-700" name="email"></error-message>
             </div>
             <!-- Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
-              <input
+              <vee-field
+                name="password"
                 type="password"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Password"
               />
+              <error-message class="text-red-700" name="password"></error-message>
             </div>
             <button
               type="submit"
@@ -81,7 +92,7 @@
             >
               Submit
             </button>
-          </form>
+          </vee-form>
           <!-- Registration Form -->
           <vee-form
             ref="registerForm"
@@ -168,7 +179,7 @@
             <!-- TOS -->
             <div class="mb-3 pl-6">
               <vee-field
-                value="1"
+                value="true"
                 name="tos"
                 type="checkbox"
                 class="w-4 h-4 float-left -ml-6 mt-1 rounded"
@@ -199,6 +210,13 @@
 import { mapWritableState } from 'pinia'
 import { useModalStore } from '@/stores/modal'
 import { isEmpty } from 'lodash'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile
+} from 'firebase/auth'
+import { auth, db } from '@/service/Firebase'
+import { doc, setDoc } from 'firebase/firestore'
 
 export default {
   name: 'TheAuth',
@@ -209,10 +227,14 @@ export default {
         name: 'required',
         email: 'required|email',
         age: 'required|numeric',
-        password: 'required|numeric|min:4',
+        password: 'required|min:4',
         confirm_password: 'required|confirmed:@password',
         country: 'required',
         tos: 'required'
+      },
+      schemaLoginForm: {
+        email: 'required|email',
+        password: 'required|min:4'
       },
       initialValue: {
         country: 'USA'
@@ -230,6 +252,26 @@ export default {
     })
   },
   methods: {
+    async loginUser(values) {
+      console.log('loginUser', values)
+      const { email, password } = values || {}
+      try {
+        let user = await signInWithEmailAndPassword(auth, email, password)
+        console.log('user', user)
+        console.log('auth.currentUser', auth.currentUser)
+
+        this.$toast.add({
+          severity: 'success',
+          summary: 'User Login Success',
+          life: 3000
+        })
+        this.isOpenModalAuth = false
+      } catch (e) {
+        console.log(e)
+        this.stateForm.msg = e
+        this.stateForm.isSuccess = false
+      }
+    },
     toggleOffModal() {
       this.isOpenModalAuth = false
     },
@@ -247,14 +289,27 @@ export default {
         }, deplay)
       })
     },
-    async handlSubmit(...rest) {
-      console.log(rest)
+    async handlSubmit(values) {
+      console.log(values)
+      const { name, email, password, age, country, tos } = values || {}
       this.stateForm.isLoading = true
-
       this.stateForm.msg = 'API Calling ...'
       try {
-        const data = await this.callAPI(4000, true)
-        console.log(data)
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+
+        const user = userCredential.user
+        const uid = user.uid
+        // Create a new document in Firestore with the user ID
+        await setDoc(doc(db, 'users', uid), {
+          name,
+          email,
+          age,
+          country,
+          tos
+        })
+
+        //const data = await this.callAPI(4000, true)
+
         this.stateForm.isSuccess = true
         this.stateForm.msg = 'Success created user'
       } catch (e) {
@@ -270,6 +325,15 @@ export default {
         this.stateForm.isLoading ||
         !this.$refs?.registerForm?.getMeta().dirty
       return result
+    }
+  },
+  watch: {
+    isOpenModalAuth(newsValue) {
+      if (newsValue) {
+        console.log(this.$refs?.loginFrom)
+        this.$refs?.loginFrom?.resetForm()
+        this.$refs?.registerForm?.resetForm()
+      }
     }
   }
 }
