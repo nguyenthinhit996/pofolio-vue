@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import InterviewVue from '@/views/Interview.vue'
+import ReviewPost from '@/views/ReviewPost.vue'
 import CKeditorVue from '@/views/CKeditor.vue'
 
 export const router = createRouter({
@@ -7,13 +7,13 @@ export const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'interview',
-      component: InterviewVue
+      name: 'home',
+      component: CKeditorVue
     },
     {
-      path: '/interview',
+      path: '/review',
       name: 'interview',
-      component: InterviewVue
+      component: ReviewPost
     },
     {
       path: '/ckeditor',

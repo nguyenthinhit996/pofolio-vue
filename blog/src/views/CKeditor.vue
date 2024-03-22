@@ -1,40 +1,78 @@
 <template>
-  <div id="app">
-    <ckeditor :editor="editor" @ready="onReady" v-model="editorData" class="h-screen" />
+  <div class="ckeditor-container">
+    <div class="toolbar-button">
+      <ButtonAutoSave :saving="isSaving" />
+      <router-link to="/review" rel="noopener">
+        <Button label="Review" severity="info" />
+      </router-link>
+      <span></span>
+    </div>
+
+    <main-editor :handleAutoSaveCB="handleAutoSave" />
   </div>
 </template>
 
 <script>
-import Editor from 'ckeditor5-custom-build/build/ckeditor'
+import Button from 'primevue/button'
+import MainEditor from '@/components/MainEditor.vue'
+import ButtonAutoSave from '@/components/common/ButtonAutoSave.vue'
+
+import { usePostStore } from '@/stores/post'
 
 export default {
-  name: 'app',
+  components: {
+    MainEditor,
+    ButtonAutoSave
+  },
   data() {
     return {
-      editor: Editor,
-      editorData: ``
+      isSaving: false,
+      storePost: usePostStore()
     }
   },
   methods: {
-    onReady(editor) {
-      // Insert the toolbar before the editable area.
-      editor.ui
-        .getEditableElement()
-        .parentElement.insertBefore(editor.ui.view.toolbar.element, editor.ui.getEditableElement())
-    }
-  },
-  watch: {
-    editorData(news) {
-      console.log(news)
+    async dumpCallAPI(dataInput) {
+      let newpro = new Promise((resolve) =>
+        setTimeout(() => {
+          console.log('Calling API ...')
+          return resolve('{}')
+        }, 3000)
+      )
+      console.log('mapWritableState', dataInput)
+      this.storePost.updateData(dataInput)
+      return newpro
+    },
+    async handleAutoSave(dataInput) {
+      console.log(' handleAutoSave dumpCallAPI')
+      this.isSaving = true
+      let data = await this.dumpCallAPI(dataInput)
+      console.log(data)
+      console.log('Done Calling API')
+      this.isSaving = false
+    },
+    handleSaveDone() {
+      this.isSaving = false
     }
   }
 }
 </script>
 
-<style>
-/* This selector targets the editable element (excluding comments). */
-.ck-editor__editable_inline:not(.ck-comment__input *) {
-  height: 100vh;
-  overflow-y: auto;
+<style lang="scss">
+.ckeditor-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .toolbar-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+    position: sticky;
+    top: 10px;
+  }
+  & .ck.ck-toolbar {
+    position: sticky;
+  }
 }
 </style>
